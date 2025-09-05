@@ -6,7 +6,9 @@ import 'package:tap_to_rent/widgets/select_category.dart';
 import 'package:tap_to_rent/widgets/suggestion_list.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final bool showBottomNavBar;
+  
+  const HomeScreen({super.key, this.showBottomNavBar = true});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -61,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
         ),
         // <<-----------Let's now create the navigation button------------>>
-        bottomNavigationBar: BottomNavigationBar(
+        bottomNavigationBar: widget.showBottomNavBar ? BottomNavigationBar(
             elevation: 0.0,
             backgroundColor: Colors.white,
             selectedItemColor: Colors.blue.shade600,
@@ -77,8 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 BottomNavigationBarItem(
                     icon: Icon(CupertinoIcons.person), label: "Profile"),
             ]
-            )
-            ,
+            ) : null,
     );
   }
 }

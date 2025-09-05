@@ -1,46 +1,122 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tap_to_rent/features/auth/data/firebase_auth_repo.dart';
+import 'package:tap_to_rent/features/auth/presentation/cubits/auth_cubit.dart';
+import 'package:tap_to_rent/features/auth/presentation/pages/login_page.dart';
+import 'package:tap_to_rent/firebase_options.dart';
 import 'package:tap_to_rent/screens/home_screen.dart';
+import 'package:tap_to_rent/themes/dark_mode.dart';
+import 'package:tap_to_rent/themes/light_mode.dart';
 
-void main() {
+void main() async {
+  // firebase setup
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  // run app
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+    return BlocProvider(
+      create: (context) =>
+          AuthCubit(authRepo: FirebaseAuthRepo())..checkAuth(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Tap to Rent',
+        home: const LoginPage(),
+        theme: lightMode,
+        darkTheme: darkMode,
       ),
-      home: const HomeScreen()
     );
   }
 }
+
 class Responsive extends StatelessWidget {
   const Responsive({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        // webapplication
-        if (constraints.maxWidth > 600) {
-          return HomeScreen();
-        }
-
-
+    return LayoutBuilder(builder: (context, constraints) {
+      // web application
+      if (constraints.maxWidth > 500) {
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text('Tap to Rent - Web'),
+            backgroundColor: Colors.deepPurple,
+            foregroundColor: Colors.white,
+          ),
+          body: Row(
+            children: [
+              // Sidebar for web
+              Container(
+                width: 200,
+                color: Colors.grey[200],
+                child: Column(
+                  children: [
+                    ListTile(
+                      leading: const Icon(Icons.home),
+                      title: const Text('Home'),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const HomeScreen(showBottomNavBar: false)),
+                        );
+                      },
+                    ),
+                    ListTile(
+                      leading: const Icon(Icons.search),
+                      title: const Text('Search'),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LoginPage()),
+                        );
+                      },
+                    ),
+                    ListTile(
+                      leading: const Icon(Icons.favorite),
+                      title: const Text('Favorites'),
+                      onTap: () {
+                        // TODO: Replace with FavoritesPage
+                      },
+                    ),
+                    ListTile(
+                      leading: const Icon(Icons.message),
+                      title: const Text('Messages'),
+                      onTap: () {
+                        
+                      },
+                    ),
+                    ListTile(
+                      leading: const Icon(Icons.person),
+                      title: const Text('Profile'),
+                      onTap: () {
+                        // TODO: Replace with ProfilePage
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              // Main content area
+              const Expanded(
+                child: HomeScreen(showBottomNavBar: false),
+              ),
+            ],
+          ),
+        );
+      } else {
         // mobile
-        else {
-          return HomeScreen();
-        }
+        return const HomeScreen(showBottomNavBar: true);
       }
-      );
+    });
   }
 }
