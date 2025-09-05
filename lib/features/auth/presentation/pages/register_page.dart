@@ -29,7 +29,7 @@ class _RegisterPageState extends State<RegisterPage> {
               // Logo
               Icon(
                 Icons.lock_open,
-                size: 80,
+                size: 78,
                 color: Colors.black,
               ),
           
