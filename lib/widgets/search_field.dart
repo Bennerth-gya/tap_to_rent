@@ -1,6 +1,6 @@
+// widgets/search_field.dart
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class SearchField extends StatefulWidget {
   const SearchField({super.key});

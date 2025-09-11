@@ -1,10 +1,11 @@
+// widgets/house_cart.dart
 import 'package:flutter/material.dart';
 import 'package:tap_to_rent/models/items_model.dart';
 
 class ItemCard extends StatefulWidget {
-   ItemCard(this.item, this.onTap, {super.key});
-  Item item;
-  Function()? onTap;
+   const ItemCard(this.item, this.onTap, {super.key});
+  final Item item;
+  final Function()? onTap;
   @override
   State<ItemCard> createState() => _ItemCardState();
 }
@@ -16,7 +17,7 @@ class _ItemCardState extends State<ItemCard> {
       width: 300.0,
       margin: EdgeInsets.only(right: 20.0),
       decoration: BoxDecoration(
-        color: Color(0Xfcf9f8),
+        color: Color(0xFFfcf9f8),
         borderRadius: BorderRadius.circular(8.0),
         border: Border.all(color: Colors.grey.shade200)
       ),

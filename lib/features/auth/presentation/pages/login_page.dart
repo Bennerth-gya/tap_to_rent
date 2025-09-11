@@ -1,3 +1,4 @@
+// features/auth/presentation/pages/login_page.dart
 /*
 LOGIN PAGE UI:
   In this page the user logs into their account
@@ -85,7 +86,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ],
                     ),
-
+                const SizedBox(height: 25,),
                     // login button
                     MyButton(
                       onTap: () {},
@@ -103,6 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                           "Don't have an account?",
                           style: TextStyle(color: Theme.of(context).colorScheme.primary),
                           ),
+                          const SizedBox(width: 6,),
                         Text(
                           "Register now", 
                           style: TextStyle(fontWeight: FontWeight.bold),

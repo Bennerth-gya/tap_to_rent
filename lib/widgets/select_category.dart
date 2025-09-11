@@ -1,3 +1,4 @@
+// widgets/select_category.dart
 import 'package:flutter/material.dart';
 
 class SelectCategory extends StatefulWidget {
@@ -10,7 +11,7 @@ class SelectCategory extends StatefulWidget {
 class _SelectCategoryState extends State<SelectCategory> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 120.0,
       width: double.infinity,
       child: ListView(

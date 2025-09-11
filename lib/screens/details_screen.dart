@@ -1,9 +1,10 @@
+// screens/details_screen.dart
 import 'package:flutter/material.dart';
 import 'package:tap_to_rent/models/items_model.dart';
 
 class DetailsScreen extends StatefulWidget {
-  DetailsScreen(this.item, {super.key});
-  Item item;
+  const DetailsScreen(this.item, {super.key});
+  final Item item;
   @override
   State<DetailsScreen> createState() => _DetailsScreenState();
 }
