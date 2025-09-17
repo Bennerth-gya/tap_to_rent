@@ -1,3 +1,4 @@
+// screens/home_screen.dart
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tap_to_rent/models/items_model.dart';
@@ -30,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Text(
                         "Ghana, Tarkwa",
                         style: TextStyle(
-                        color: Colors.black
+                        color: Colors.grey.shade600,
                     ),)
                     ],
                     ),
