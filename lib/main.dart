@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:tap_to_rent/features/auth/data/firebase_auth_repo.dart';
 import 'package:tap_to_rent/features/auth/presentation/cubits/auth_cubit.dart';
 import 'package:tap_to_rent/features/auth/presentation/pages/login_page.dart';
@@ -11,16 +12,26 @@ import 'package:tap_to_rent/firebase_options.dart';
 import 'package:tap_to_rent/screens/home_screen.dart';
 import 'package:tap_to_rent/themes/dark_mode.dart';
 import 'package:tap_to_rent/themes/light_mode.dart';
+import 'package:tap_to_rent/upload_images.dart';
 
-void main() => runApp(
- // WidgetsFlutterBinding.ensureInitialized();
- // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(
+    DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => MyApp(),
+    ),
+  );
 
-  DevicePreview(
-    enabled: !kReleaseMode,
-    builder: (context) => MyApp(), // Wrap your app
-  ),
-);
+  // supabse setup
+  await Supabase.initialize(
+    url: 'https://wgapttjzjlfjbumaaqnn.supabase.co',
+    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndnYXB0dGp6amxmamJ1bWFhcW5uIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgwNzM5NjcsImV4cCI6MjA3MzY0OTk2N30.pwdty-_GGALOHfLW7e4HryCl8Fe-yI9ioxHfS2eXzQI'
+  );
+}
+
+
 /*
 void main() async {
   // firebase setup
@@ -30,8 +41,8 @@ void main() async {
   // run app
   runApp(const MyApp());
 }
-
 */
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -44,7 +55,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Tap to Rent',
-        home: const HomeScreen(showBottomNavBar: true),
+        home: const UploadImages(),
         theme: lightMode,
         darkTheme: darkMode,
       ),

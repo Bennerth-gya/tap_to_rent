@@ -10,6 +10,7 @@ LOGIN PAGE UI:
 import 'package:flutter/material.dart';
 import 'package:tap_to_rent/features/auth/presentation/components/my_button.dart';
 import 'package:tap_to_rent/features/auth/presentation/components/my_textfield.dart';
+import 'package:tap_to_rent/screens/home_screen.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -89,7 +90,12 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 25,),
                     // login button
                     MyButton(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const HomeScreen()),
+                        );
+                      },
                       text: "LOGIN",
                     ),
 

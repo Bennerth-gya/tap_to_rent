@@ -81,11 +81,11 @@ class _DetailsScreenState extends State<DetailsScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                    "${widget.item.price}\$ / year",
+                    "${widget.item.price}₵ / year",
                     style: TextStyle(
                       fontWeight: FontWeight.bold, fontSize: 22.0,
                     ),
-                    overflow: TextOverflow.ellipsis, 
+                    overflow: TextOverflow.ellipsis,
                   ),
                   IconButton(onPressed: (){}, icon: Icon(Icons.favorite_outline)
                   )
